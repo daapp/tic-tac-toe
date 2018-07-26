@@ -1,4 +1,5 @@
-import qualified TicTacToe as TTT
+import           Data.Maybe (isNothing)
+import qualified TicTacToe  as TTT
 
 main = do
   let state@(board, result) = TTT.start
@@ -8,8 +9,9 @@ main = do
 play board = do
   putStrLn "?"
   s <- getLine
-  let (board', result') = TTT.play board (read s)
+  let (board', result) = TTT.play board (read s)
   print board'
-  if isNothing result'
-  then play board'
-  else print result'
+
+  if isNothing result
+    then play board'
+    else print result
