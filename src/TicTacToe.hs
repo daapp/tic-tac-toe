@@ -75,10 +75,10 @@ getBestMove depth player (Tree (_, moveStates)) = getBest $ map aux moveStates
 -- |
 getPayOffAB :: Int -> Player -> Int -> Int -> GameTree -> Int
 -- | поиск в глубину закончен - определяем победителя
-getPayOffAB 0 player _     _    (Tree (board, _))          = staticEval board player|
+getPayOffAB 0 player _     _    (Tree (board, _))          = staticEval board player
 -- | свободные клетки закончились - определяем победителя
 getPayOffAB depth player _     _    (Tree (board, []))         = staticEval board player
--- | рекурсивный поиск в глубину с помощью альфа-бета отсечения 
+-- | рекурсивный поиск в глубину с помощью альфа-бета отсечения
 getPayOffAB depth player alpha beta (Tree (board, moveStates)) = searchAB alpha beta moveStates
     where currentTurn = snd board
 
