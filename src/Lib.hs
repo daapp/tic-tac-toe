@@ -33,10 +33,10 @@ modify :: (TTT.GameState -> TTT.GameState) -> WebM ()
 modify f = ask >>= liftIO . atomically . flip modifyTVar' f
 
 
-startApp = do
+startApp port = do
   sync <- newTVarIO TTT.start
   let runActionToIO m = runReaderT (runWebM m) sync
-  scottyT 9999 runActionToIO app
+  scottyT port runActionToIO app
 
 app :: ScottyT Text WebM ()
 app = do
